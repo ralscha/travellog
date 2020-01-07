@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.rasc.travellog.config.security.AppUserDetail;
+import ch.rasc.travellog.dto.SyncRequest;
+import ch.rasc.travellog.dto.SyncResponse;
+import ch.rasc.travellog.dto.SyncResponse.NewId;
 import ch.rasc.travellog.dto.TravelSync;
-import ch.rasc.travellog.dto.TravelSyncRequest;
-import ch.rasc.travellog.dto.TravelSyncResponse;
-import ch.rasc.travellog.dto.TravelSyncResponse.NewId;
 
 @RestController
 @RequestMapping("/be")
@@ -49,7 +49,7 @@ class TravelController {
   }
 
   @PostMapping("travel_sync")
-  public TravelSyncResponse sync(@RequestBody TravelSyncRequest sync,
+  public SyncResponse<TravelSync> sync(@RequestBody SyncRequest<TravelSync> sync,
       @AuthenticationPrincipal AppUserDetail userDetails) {
     Set<Long> removed = null;
     Map<Long, Long> updated = null;
@@ -73,17 +73,16 @@ class TravelController {
     // update
     if (sync.getUpdated() != null && !sync.getUpdated().isEmpty()) {
       updated = new HashMap<>();
-      for (TravelSync clientTodo : sync.getUpdated()) {
+      for (TravelSync clientTravel : sync.getUpdated()) {
         var record = this.dsl
-            .select(TRAVEL.ID, TRAVEL.UPDATED, TRAVEL.NAME).from(TRAVEL)
-            .where(
-                TRAVEL.ID.eq(clientTodo.getId()).and(TRAVEL.APP_USER_ID.eq(loggedInUserId)))
+            .select(TRAVEL.ID, TRAVEL.UPDATED, TRAVEL.NAME).from(TRAVEL).where(TRAVEL.ID
+                .eq(clientTravel.getId()).and(TRAVEL.APP_USER_ID.eq(loggedInUserId)))
             .fetchOne();
 
         if (record != null) {
-          if (record.get(TRAVEL.UPDATED).toEpochSecond(ZoneOffset.UTC) > clientTodo
+          if (record.get(TRAVEL.UPDATED).toEpochSecond(ZoneOffset.UTC) > clientTravel
               .getTs()) {
-            // db todo is newer than the version sent from the client. ignore client
+            // db travel is newer than the version sent from the client. ignore client
             // update
             get.add(new TravelSync(record.get(TRAVEL.ID),
                 record.get(TRAVEL.UPDATED).toEpochSecond(ZoneOffset.UTC),
@@ -92,13 +91,12 @@ class TravelController {
           else {
             LocalDateTime now = LocalDateTime.now();
             int noOfUpdated = this.dsl.update(TRAVEL)
-                .set(TRAVEL.NAME, clientTodo.getName())
-                .set(TRAVEL.UPDATED, now)
-                .where(TRAVEL.ID.eq(clientTodo.getId())
+                .set(TRAVEL.NAME, clientTravel.getName()).set(TRAVEL.UPDATED, now)
+                .where(TRAVEL.ID.eq(clientTravel.getId())
                     .and(TRAVEL.APP_USER_ID.eq(loggedInUserId)))
                 .execute();
             if (noOfUpdated == 1) {
-              updated.put(clientTodo.getId(), now.toEpochSecond(ZoneOffset.UTC));
+              updated.put(clientTravel.getId(), now.toEpochSecond(ZoneOffset.UTC));
             }
           }
         }
@@ -108,17 +106,15 @@ class TravelController {
     // insert
     if (sync.getInserted() != null && !sync.getInserted().isEmpty()) {
       inserted = new HashMap<>();
-      for (TravelSync clientTodo : sync.getInserted()) {
+      for (TravelSync clientTravel : sync.getInserted()) {
         LocalDateTime now = LocalDateTime.now();
 
         long id = this.dsl
-            .insertInto(TRAVEL, TRAVEL.NAME, TRAVEL.UPDATED,
-                TRAVEL.APP_USER_ID)
-            .values(clientTodo.getName(), now,
-                loggedInUserId)
-            .returning(TRAVEL.ID).fetchOne().getId();
+            .insertInto(TRAVEL, TRAVEL.NAME, TRAVEL.UPDATED, TRAVEL.APP_USER_ID)
+            .values(clientTravel.getName(), now, loggedInUserId).returning(TRAVEL.ID)
+            .fetchOne().getId();
 
-        inserted.put(clientTodo.getId(),
+        inserted.put(clientTravel.getId(),
             new NewId(id, now.toEpochSecond(ZoneOffset.UTC)));
       }
     }
@@ -126,9 +122,9 @@ class TravelController {
     // gets
     if (sync.getGets() != null) {
       for (Long id : sync.getGets()) {
-        var record = this.dsl
-            .select(TRAVEL.ID, TRAVEL.UPDATED, TRAVEL.NAME).from(TRAVEL)
-            .where(TRAVEL.ID.eq(id).and(TRAVEL.APP_USER_ID.eq(loggedInUserId))).fetchOne();
+        var record = this.dsl.select(TRAVEL.ID, TRAVEL.UPDATED, TRAVEL.NAME).from(TRAVEL)
+            .where(TRAVEL.ID.eq(id).and(TRAVEL.APP_USER_ID.eq(loggedInUserId)))
+            .fetchOne();
 
         if (record != null) {
           get.add(new TravelSync(record.get(TRAVEL.ID),
@@ -148,7 +144,7 @@ class TravelController {
       updated = null;
     }
 
-    return new TravelSyncResponse(get, inserted, updated, removed);
+    return new SyncResponse<>(get, inserted, updated, removed);
   }
 
 }

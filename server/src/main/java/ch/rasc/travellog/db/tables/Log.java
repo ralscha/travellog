@@ -37,7 +37,7 @@ import ch.rasc.travellog.db.tables.records.LogRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Log extends TableImpl<LogRecord> {
 
-  private static final long serialVersionUID = 1286851537;
+  private static final long serialVersionUID = 1308215506;
 
   /**
    * The reference instance of <code>log</code>
@@ -59,9 +59,10 @@ public class Log extends TableImpl<LogRecord> {
       org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
   /**
-   * The column <code>log.ts</code>.
+   * The column <code>log.created</code>.
    */
-  public final TableField<LogRecord, LocalDateTime> TS = createField(DSL.name("ts"),
+  public final TableField<LogRecord, LocalDateTime> CREATED = createField(
+      DSL.name("created"),
       org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false)
           .defaultValue(org.jooq.impl.DSL.field("current_timestamp()",
               org.jooq.impl.SQLDataType.LOCALDATETIME)),

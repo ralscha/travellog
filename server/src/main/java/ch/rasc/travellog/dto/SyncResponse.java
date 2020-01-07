@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
-public class TravelSyncResponse {
-  private final List<TravelSync> gets;
+public class SyncResponse<T> {
+  private final List<T> gets;
 
   private final Map<Long, Long> updated;
 
@@ -17,15 +17,15 @@ public class TravelSyncResponse {
 
   private final Set<Long> removed;
 
-  public TravelSyncResponse(List<TravelSync> gets, Map<Long, NewId> inserted,
-      Map<Long, Long> updated, Set<Long> removed) {
+  public SyncResponse(List<T> gets, Map<Long, NewId> inserted, Map<Long, Long> updated,
+      Set<Long> removed) {
     this.gets = gets != null ? List.copyOf(gets) : null;
     this.inserted = inserted != null ? Map.copyOf(inserted) : null;
     this.updated = updated != null ? Map.copyOf(updated) : null;
     this.removed = removed != null ? Set.copyOf(removed) : null;
   }
 
-  public List<TravelSync> getGets() {
+  public List<T> getGets() {
     return this.gets;
   }
 

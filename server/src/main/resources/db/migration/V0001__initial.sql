@@ -37,7 +37,7 @@ CREATE TABLE travel (
 
 CREATE TABLE log (
     id            BIGINT         NOT NULL AUTO_INCREMENT,
-    ts            TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created       TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     lat           DECIMAL(10, 8) NOT NULL, 
     lng           DECIMAL(11, 8) NOT NULL,
     location      VARCHAR(255), 

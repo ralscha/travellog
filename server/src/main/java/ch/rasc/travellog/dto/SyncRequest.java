@@ -6,18 +6,18 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TravelSyncRequest {
-  private final List<TravelSync> inserted;
+public class SyncRequest<T> {
+  private final List<T> inserted;
 
-  private final List<TravelSync> updated;
+  private final List<T> updated;
 
   private final Set<Long> removed;
 
   private final Set<Long> gets;
 
   @JsonCreator
-  public TravelSyncRequest(@JsonProperty("inserted") List<TravelSync> inserted,
-      @JsonProperty("updated") List<TravelSync> updated,
+  public SyncRequest(@JsonProperty("inserted") List<T> inserted,
+      @JsonProperty("updated") List<T> updated,
       @JsonProperty("removed") Set<Long> removed, @JsonProperty("gets") Set<Long> gets) {
     this.inserted = inserted != null ? List.copyOf(inserted) : null;
     this.updated = updated != null ? List.copyOf(updated) : null;
@@ -25,11 +25,11 @@ public class TravelSyncRequest {
     this.gets = gets != null ? Set.copyOf(gets) : null;
   }
 
-  public List<TravelSync> getInserted() {
+  public List<T> getInserted() {
     return this.inserted;
   }
 
-  public List<TravelSync> getUpdated() {
+  public List<T> getUpdated() {
     return this.updated;
   }
 

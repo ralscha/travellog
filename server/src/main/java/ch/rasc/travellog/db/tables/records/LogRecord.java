@@ -25,7 +25,7 @@ import ch.rasc.travellog.db.tables.Log;
 public class LogRecord extends UpdatableRecordImpl<LogRecord> implements
     Record8<Long, LocalDateTime, BigDecimal, BigDecimal, String, String, Long, LocalDateTime> {
 
-  private static final long serialVersionUID = 258694334;
+  private static final long serialVersionUID = -1434401708;
 
   /**
    * Setter for <code>log.id</code>.
@@ -42,16 +42,16 @@ public class LogRecord extends UpdatableRecordImpl<LogRecord> implements
   }
 
   /**
-   * Setter for <code>log.ts</code>.
+   * Setter for <code>log.created</code>.
    */
-  public void setTs(LocalDateTime value) {
+  public void setCreated(LocalDateTime value) {
     set(1, value);
   }
 
   /**
-   * Getter for <code>log.ts</code>.
+   * Getter for <code>log.created</code>.
    */
-  public LocalDateTime getTs() {
+  public LocalDateTime getCreated() {
     return (LocalDateTime) get(1);
   }
 
@@ -169,7 +169,7 @@ public class LogRecord extends UpdatableRecordImpl<LogRecord> implements
 
   @Override
   public Field<LocalDateTime> field2() {
-    return Log.LOG.TS;
+    return Log.LOG.CREATED;
   }
 
   @Override
@@ -209,7 +209,7 @@ public class LogRecord extends UpdatableRecordImpl<LogRecord> implements
 
   @Override
   public LocalDateTime component2() {
-    return getTs();
+    return getCreated();
   }
 
   @Override
@@ -249,7 +249,7 @@ public class LogRecord extends UpdatableRecordImpl<LogRecord> implements
 
   @Override
   public LocalDateTime value2() {
-    return getTs();
+    return getCreated();
   }
 
   @Override
@@ -290,7 +290,7 @@ public class LogRecord extends UpdatableRecordImpl<LogRecord> implements
 
   @Override
   public LogRecord value2(LocalDateTime value) {
-    setTs(value);
+    setCreated(value);
     return this;
   }
 
@@ -359,12 +359,12 @@ public class LogRecord extends UpdatableRecordImpl<LogRecord> implements
   /**
    * Create a detached, initialised LogRecord
    */
-  public LogRecord(Long id, LocalDateTime ts, BigDecimal lat, BigDecimal lng,
+  public LogRecord(Long id, LocalDateTime created, BigDecimal lat, BigDecimal lng,
       String location, String report, Long travelId, LocalDateTime updated) {
     super(Log.LOG);
 
     set(0, id);
-    set(1, ts);
+    set(1, created);
     set(2, lat);
     set(3, lng);
     set(4, location);
