@@ -4,11 +4,11 @@ import {Travel} from '../../model/travel';
 import {TravelService} from '../../service/travel.service';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-travel-list',
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
 })
-export class ListPage implements OnInit {
+export class TravelListPage implements OnInit {
 
   travels$: Observable<Travel[]>;
 
@@ -16,7 +16,7 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
-    this.travels$ = this.travelService.getTravels();
+    this.travels$ = this.travelService.getObservable();
     this.travelService.requestSync();
   }
 

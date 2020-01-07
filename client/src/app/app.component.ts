@@ -37,6 +37,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (connectionState.isUser()) {
       newMenu.push({
+        title: 'Log',
+        url: '/log',
+        faIcon: 'far fa-clipboard-list fa-fw'
+      }, {
         title: 'Travels',
         url: '/travel',
         faIcon: 'far fa-globe fa-fw'

@@ -3,16 +3,16 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
-import {TravelEditPage} from './edit.page';
+import {LogEditPage} from './edit.page';
 
 const routes: Routes = [
   {
     path: ':id',
-    component: TravelEditPage
+    component: LogEditPage
   },
   {
     path: '',
-    component: TravelEditPage
+    component: LogEditPage
   }
 ];
 
@@ -23,7 +23,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TravelEditPage]
+  declarations: [LogEditPage]
 })
-export class TravelEditPageModule {
+export class LogEditPageModule {
 }

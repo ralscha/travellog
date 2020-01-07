@@ -3,26 +3,26 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
-import {TravelListPage} from './list.page';
 import {AuthGuard} from '../../service/auth.guard';
+import {LogListPage} from './list.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TravelListPage,
+    component: LogListPage,
     canActivate: [AuthGuard],
     data: {role: 'USER', offline: true},
     pathMatch: 'full'
   },
   {
     path: 'edit',
-    loadChildren: () => import('../edit/edit.module').then(m => m.TravelEditPageModule),
+    loadChildren: () => import('../edit/edit.module').then(m => m.LogEditPageModule),
     canActivate: [AuthGuard],
     data: {role: 'USER', offline: true}
   },
   {
     path: '**',
-    redirectTo: '/travel'
+    redirectTo: '/log'
   },
 ];
 
@@ -33,7 +33,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TravelListPage]
+  declarations: [LogListPage]
 })
-export class TravelListPageModule {
+export class LogListPageModule {
 }

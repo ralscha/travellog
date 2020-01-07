@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/travel"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Edit Log
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form #logForm="ngForm" (ngSubmit)="logForm.valid && save(logForm)"
+        [ngFormOptions]="{updateOn: 'submit'}" novalidate>
+
+    <ion-grid *ngIf="selectedLog">
+
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-item>
+            <ion-label position="stacked">Location</ion-label>
+            <ion-input #location="ngModel" [ngModel]="selectedLog.location" name="location" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-text *ngIf="logForm.submitted && location.invalid" color="danger">
+            <p *ngIf="location.errors.required" class="ion-padding-start">
+              Location is required
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-margin-top" offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-button expand="block" type="submit">Save</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+
+  <ion-fab *ngIf="selectedLog" horizontal="start" slot="fixed" vertical="bottom">
+    <ion-fab-button (click)="deleteLog()">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+</ion-content>

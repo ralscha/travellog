@@ -1,5 +1,5 @@
-export interface Travel {
-  id: number;
+import {SyncEntry} from './sync-entry';
+
+export interface Travel extends SyncEntry {
   name: string;
-  ts: number;
 }

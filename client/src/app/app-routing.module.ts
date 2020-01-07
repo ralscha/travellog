@@ -5,12 +5,18 @@ import {AuthGuard} from './service/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/travel',
+    redirectTo: '/log',
     pathMatch: 'full'
   },
   {
+    path: 'log',
+    loadChildren: () => import('./log/list/list.module').then(m => m.LogListPageModule),
+    canActivate: [AuthGuard],
+    data: {role: 'USER', offline: true}
+  },
+  {
     path: 'travel',
-    loadChildren: () => import('./travel/list/list.module').then(m => m.ListPageModule),
+    loadChildren: () => import('./travel/list/list.module').then(m => m.TravelListPageModule),
     canActivate: [AuthGuard],
     data: {role: 'USER', offline: true}
   },
@@ -59,7 +65,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/travel'
+    redirectTo: '/log'
   }
 
 ];
