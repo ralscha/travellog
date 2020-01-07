@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/travel"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Edit Travel
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form #travelForm="ngForm" (ngSubmit)="travelForm.valid && save(travelForm)"
+        [ngFormOptions]="{updateOn: 'submit'}" novalidate>
+
+    <ion-grid *ngIf="selectedTravel">
+
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-item>
+            <ion-label position="stacked">Name</ion-label>
+            <ion-input #name="ngModel" [ngModel]="selectedTravel.name" name="name" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-text *ngIf="travelForm.submitted && name.invalid" color="danger">
+            <p *ngIf="name.errors.required" class="ion-padding-start">
+              Name is required
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-margin-top" offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-button expand="block" type="submit">Save</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+
+  <ion-fab *ngIf="selectedTravel" horizontal="start" slot="fixed" vertical="bottom">
+    <ion-fab-button (click)="deleteTravel()">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+</ion-content>
