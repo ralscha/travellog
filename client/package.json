@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "prebuild-prod": "node ./build-info-env.js",
-    "build-prod": "ng build --prod",
+    "build-prod": "ng build --prod --baseHref=/app/",
     "postbuild-prod": "bread-compressor dist/app",
     "serve-dist": "ws --hostname localhost -d dist/app -p 1234 -o --log.format tiny --rewrite \"/be/* -> http://localhost:8080/be/$1\"",
     "lint": "ng lint"
