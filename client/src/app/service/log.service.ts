@@ -9,8 +9,18 @@ import {SyncService} from './sync.service';
 })
 export class LogService extends SyncService<Log> {
 
+  private travelId: number;
+
   constructor(httpClient: HttpClient, appDatabase: AppDatabase) {
     super(httpClient, appDatabase);
+  }
+
+  setTravelId(travelId: number) {
+    this.travelId = travelId;
+  }
+
+  getTravelId() {
+    return this.travelId;
   }
 
   protected changed(oldEntry: Log, newEntry: Log): boolean {
@@ -19,6 +29,13 @@ export class LogService extends SyncService<Log> {
       || oldEntry.created !== newEntry.created
       || oldEntry.lat !== newEntry.lat
       || oldEntry.lng !== newEntry.lng;
+  }
+
+  protected updateSubject() {
+    console.log('overridden');
+    this.appDatabase[this.getTableName()].where('ts').notEqual(-1).and(log => log.travelId === this.travelId).toArray().then(log => {
+      this.subject.next(log);
+    });
   }
 
   protected getTableName(): string {

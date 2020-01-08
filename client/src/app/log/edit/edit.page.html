@@ -1,11 +1,16 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/travel"></ion-back-button>
+      <ion-back-button defaultHref="/log"></ion-back-button>
     </ion-buttons>
     <ion-title>
       Edit Log
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="deleteLog()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -19,19 +24,81 @@
       <ion-row>
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-item>
-            <ion-label position="stacked">Location</ion-label>
-            <ion-input #location="ngModel" [ngModel]="selectedLog.location" name="location" required></ion-input>
+            <ion-label position="stacked">Time</ion-label>
+            <ion-input #time="ngModel" [ngModel]="createdString" name="time" required></ion-input>
           </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-text *ngIf="logForm.submitted && time.invalid" color="danger">
+            <p *ngIf="time.errors.required" class="error ion-padding-start">
+              Time is required
+            </p>
+          </ion-text>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-item>
+            <ion-label position="stacked">Latitude</ion-label>
+            <ion-input type="number" #lat="ngModel" [ngModel]="selectedLog.lat" name="lat" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-text *ngIf="logForm.submitted && lat.invalid" color="danger">
+            <p *ngIf="lat.errors.required" class="error ion-padding-start">
+              Latitude is required
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-item>
+            <ion-label position="stacked">Longitude</ion-label>
+            <ion-input type="number" #lng="ngModel" [ngModel]="selectedLog.lng" name="lng" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-text *ngIf="logForm.submitted && lng.invalid" color="danger">
+            <p *ngIf="lng.errors.required" class="error ion-padding-start">
+              Longitude is required
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-item>
+            <ion-label position="stacked">Location</ion-label>
+            <ion-input #location="ngModel" [ngModel]="selectedLog.location" name="location" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-text *ngIf="logForm.submitted && location.invalid" color="danger">
-            <p *ngIf="location.errors.required" class="ion-padding-start">
+            <p *ngIf="location.errors.required" class="error ion-padding-start">
               Location is required
             </p>
           </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-item>
+            <ion-label position="stacked">Report</ion-label>
+            <ion-textarea rows="6" [ngModel]="selectedLog.report" name="report"></ion-textarea>
+          </ion-item>
         </ion-col>
       </ion-row>
 
@@ -43,13 +110,5 @@
     </ion-grid>
 
   </form>
-
-
-  <ion-fab *ngIf="selectedLog" horizontal="start" slot="fixed" vertical="bottom">
-    <ion-fab-button (click)="deleteLog()">
-      <ion-icon name="trash"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
 
 </ion-content>

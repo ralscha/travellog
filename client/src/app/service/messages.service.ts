@@ -23,7 +23,7 @@ export class MessagesService {
     const toast = await this.toastCtrl.create({
       message,
       duration,
-      position: 'bottom',
+      position: 'top',
       color: 'success'
     });
     await toast.present();
@@ -33,7 +33,7 @@ export class MessagesService {
     const toast = await this.toastCtrl.create({
       message,
       duration: 4000,
-      position: 'bottom',
+      position: 'top',
       color: 'danger'
     });
     await toast.present();

@@ -11,7 +11,7 @@ import {SyncEntry} from '../model/sync-entry';
 })
 export abstract class SyncService<T extends SyncEntry> {
 
-  private readonly subject = new BehaviorSubject<T[]>([]);
+  protected readonly subject = new BehaviorSubject<T[]>([]);
   private readonly observable = this.subject.asObservable();
 
   protected constructor(private readonly httpClient: HttpClient,
@@ -146,7 +146,7 @@ export abstract class SyncService<T extends SyncEntry> {
 
   protected abstract getUrlPrefix(): string;
 
-  private updateSubject() {
+  protected updateSubject() {
     this.appDatabase[this.getTableName()].where('ts').notEqual(-1).toArray().then(travel => {
       this.subject.next(travel);
     });

@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Logs: {{selectedTravel}}
+      Log: {{selectedTravel}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,10 +16,13 @@
   </ion-refresher>
 
   <ng-container *ngIf="logs$ | async as logs">
-    <ion-list lines="full">
-      <ion-item *ngFor="let log of logs" detail="true" routerLink="./edit/{{log.id}}">
-        <ion-label>{{log.location}}</ion-label>
-      </ion-item>
+    <ion-list lines="none">
+        <ion-card *ngFor="let log of logs" routerLink="./edit/{{log.id}}">
+          <ion-card-header>
+            <ion-card-subtitle>{{createdString(log)}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>{{log.location}}</ion-card-content>
+        </ion-card>
     </ion-list>
   </ng-container>
 

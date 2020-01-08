@@ -5,7 +5,8 @@ import {AlertController} from '@ionic/angular';
 import {NgForm} from '@angular/forms';
 import {Log} from '../../model/log';
 import {LogService} from '../../service/log.service';
-import {TravelService} from '../../service/travel.service';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 
 @Component({
   selector: 'app-log-edit',
@@ -15,30 +16,36 @@ import {TravelService} from '../../service/travel.service';
 export class LogEditPage implements OnInit {
 
   selectedLog: Log;
+  createdString: string;
 
   constructor(private readonly route: ActivatedRoute,
               private readonly router: Router,
               private readonly messagesService: MessagesService,
               private readonly alertController: AlertController,
-              private readonly logService: LogService,
-              private readonly travelService: TravelService) {
+              private readonly logService: LogService) {
   }
 
   async ngOnInit() {
     const logIdString = this.route.snapshot.paramMap.get('id');
     if (logIdString) {
       this.selectedLog = await this.logService.getEntry(parseInt(logIdString, 10));
+      this.createdString = format(this.selectedLog.created * 1000, 'yyyy-MM-dd HH:mm');
     } else {
+      this.createdString = format(new Date(), 'yyyy-MM-dd HH:mm');
       this.selectedLog = {
         id: null,
-        created: Math.floor(Date.now() / 1000),
+        created: null,
         location: null,
         report: null,
         lat: null,
         lng: null,
-        travelId: await this.travelService.getDefaultTravelId(),
+        travelId: this.logService.getTravelId(),
         ts: 0
       };
+      navigator.geolocation.getCurrentPosition(pos => {
+        this.selectedLog.lat = pos.coords.latitude;
+        this.selectedLog.lng = pos.coords.longitude;
+      });
     }
   }
 
@@ -62,10 +69,15 @@ export class LogEditPage implements OnInit {
   }
 
   async save(form: NgForm) {
+    const createdDate = parse(form.value.time, 'yyyy-MM-dd HH:mm', new Date());
+
+    this.selectedLog.created = createdDate.getTime() / 1000;
     this.selectedLog.location = form.value.location;
     this.selectedLog.report = form.value.report;
     this.selectedLog.lat = form.value.lat;
     this.selectedLog.lng = form.value.lng;
+    this.selectedLog.travelId = this.logService.getTravelId();
+
     await this.logService.save(this.selectedLog);
     await this.messagesService.showSuccessToast('Travel successfully saved', 1000);
     await this.router.navigate(['/log']);

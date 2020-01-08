@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {LogService} from '../../service/log.service';
 import {Log} from '../../model/log';
 import {TravelService} from '../../service/travel.service';
+import format from 'date-fns/format';
 
 @Component({
   selector: 'app-log-list',
@@ -14,18 +15,27 @@ export class LogListPage implements OnInit {
   logs$: Observable<Log[]>;
   selectedTravel: string;
 
-  constructor(private readonly logService: LogService, private readonly travelService: TravelService) {
+  constructor(private readonly logService: LogService,
+              private readonly travelService: TravelService) {
   }
 
   async ngOnInit() {
     this.selectedTravel = await this.travelService.getDefaultTravelName();
-    this.logs$ = this.logService.getObservable();
-    this.logService.requestSync();
+    const selectedTravelId = await this.travelService.getDefaultTravelId();
+    if (selectedTravelId) {
+      this.logService.setTravelId(selectedTravelId);
+      this.logs$ = this.logService.getObservable();
+      this.logService.requestSync();
+    }
   }
 
   refresh(event) {
     this.logService.requestSync()
       .finally(() => event.target.complete());
+  }
+
+  createdString(log: Log) {
+    return format(log.created * 1000, 'yyyy-MM-dd HH:mm');
   }
 
 }

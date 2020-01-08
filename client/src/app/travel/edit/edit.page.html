@@ -6,6 +6,11 @@
     <ion-title>
       Edit Travel
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="deleteTravel()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -28,7 +33,7 @@
       <ion-row>
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-text *ngIf="travelForm.submitted && name.invalid" color="danger">
-            <p *ngIf="name.errors.required" class="ion-padding-start">
+            <p *ngIf="name.errors.required" class="error ion-padding-start">
               Name is required
             </p>
           </ion-text>
@@ -43,13 +48,5 @@
     </ion-grid>
 
   </form>
-
-
-  <ion-fab *ngIf="selectedTravel" horizontal="start" slot="fixed" vertical="bottom">
-    <ion-fab-button (click)="deleteTravel()">
-      <ion-icon name="trash"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
 
 </ion-content>
