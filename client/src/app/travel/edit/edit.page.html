@@ -49,4 +49,10 @@
 
   </form>
 
+  <ion-fab *ngIf="shareEnabled()" horizontal="end" slot="fixed" vertical="bottom">
+    <ion-fab-button (click)="share()">
+      <ion-icon name="share"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

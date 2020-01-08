@@ -77,6 +77,12 @@
 
       <ion-row>
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-button expand="block" size="small" type="button" (click)="refreshLocation()">Update Lat/Lng</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-item>
             <ion-label position="stacked">Location</ion-label>
             <ion-input #location="ngModel" [ngModel]="selectedLog.location" name="location" required></ion-input>

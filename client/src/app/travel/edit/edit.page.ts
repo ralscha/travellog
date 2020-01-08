@@ -65,4 +65,18 @@ export class TravelEditPage implements OnInit {
     await this.travelService.delete(this.selectedTravel);
     await this.router.navigate(['/travel']);
   }
+
+  shareEnabled(): boolean {
+    // @ts-ignore
+    return this.selectedTravel?.id > 0 && navigator.share;
+  }
+
+  async share() {
+    // @ts-ignore
+    navigator.share({
+      title: 'TravelLog',
+      text: this.selectedTravel.name,
+      url: 'https://travel.hplar.ch/view/log/' + this.selectedTravel.id
+    });
+  }
 }

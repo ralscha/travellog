@@ -4,7 +4,7 @@
 </header>
 
 <div class="log">
-  <mat-card *ngFor="let log of logs" (click)="onLogClick(log)">
+  <mat-card *ngFor="let log of logs" (click)="onLogClick(log)" [class.selected]="log.id === selectedLog.id">
     <mat-card-title>{{log.location}}</mat-card-title>
     <mat-card-subtitle>{{createdString(log)}}</mat-card-subtitle>
     <mat-card-content>{{log.report}}</mat-card-content>
@@ -13,13 +13,17 @@
 
 <div class="map">
   <agm-map
+    [fitBounds]="selectedLog !== null"
+    [maxZoom]="16"
     [latitude]="lat"
     [longitude]="lng"
     [zoom]="zoom"
+    [mapTypeControl]="true"
     [disableDefaultUI]="false"
     [zoomControl]="false">
 
     <agm-marker *ngIf="selectedLog"
+      [agmFitBounds]="true"
       [latitude]="selectedLog.lat"
       [longitude]="selectedLog.lng">
 

@@ -56,6 +56,8 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
       customizer.antMatchers(
           pathPrefix + "/login",
           pathPrefix + "/signup",
+          pathPrefix + "/logview/*",
+          pathPrefix + "/logview_name/*",
           pathPrefix + "/confirm-signup",
           pathPrefix + "/reset-password-request",
           pathPrefix + "/reset-password",
