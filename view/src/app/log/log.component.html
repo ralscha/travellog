@@ -1,0 +1,33 @@
+
+<header>
+  TravelLog: {{travellog}}
+</header>
+
+<div class="log">
+  <mat-card *ngFor="let log of logs" (click)="onLogClick(log)">
+    <mat-card-title>{{log.location}}</mat-card-title>
+    <mat-card-subtitle>{{createdString(log)}}</mat-card-subtitle>
+    <mat-card-content>{{log.report}}</mat-card-content>
+  </mat-card>
+</div>
+
+<div class="map">
+  <agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    [disableDefaultUI]="false"
+    [zoomControl]="false">
+
+    <agm-marker *ngIf="selectedLog"
+      [latitude]="selectedLog.lat"
+      [longitude]="selectedLog.lng">
+
+      <agm-info-window>
+        {{selectedLog.location}}
+      </agm-info-window>
+
+    </agm-marker>
+
+  </agm-map>
+</div>
