@@ -113,6 +113,13 @@
           <ion-button expand="block" type="submit">Save</ion-button>
         </ion-col>
       </ion-row>
+
+      <ion-row *ngIf="online && selectedLog.id > 0">
+        <ion-col class="ion-margin-top" offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
+          <ion-button expand="block" type="button" routerLink="/log/photo/{{selectedLog.id}}" routerDirection="forward">Photos</ion-button>
+        </ion-col>
+      </ion-row>
+
     </ion-grid>
 
   </form>

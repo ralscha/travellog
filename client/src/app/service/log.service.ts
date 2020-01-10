@@ -32,7 +32,6 @@ export class LogService extends SyncService<Log> {
   }
 
   protected updateSubject() {
-    console.log('overridden');
     this.appDatabase[this.getTableName()].where('ts').notEqual(-1).and(log => log.travelId === this.travelId).toArray().then(log => {
       this.subject.next(log);
     });

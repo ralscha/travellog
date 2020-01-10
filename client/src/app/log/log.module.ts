@@ -3,8 +3,11 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
-import {AuthGuard} from '../../service/auth.guard';
-import {LogListPage} from './list.page';
+import {LogListPage} from './list/list.page';
+import {LogEditPage} from './edit/edit.page';
+import {LogPhotoPage} from './photo/photo.page';
+import {HttpClientModule} from '@angular/common/http';
+import {AuthGuard} from '../service/auth.guard';
 
 const routes: Routes = [
   {
@@ -16,9 +19,21 @@ const routes: Routes = [
   },
   {
     path: 'edit',
-    loadChildren: () => import('../edit/edit.module').then(m => m.LogEditPageModule),
+    component: LogEditPage,
     canActivate: [AuthGuard],
     data: {role: 'USER', offline: true}
+  },
+  {
+    path: 'edit/:id',
+    component: LogEditPage,
+    canActivate: [AuthGuard],
+    data: {role: 'USER', offline: true}
+  },
+  {
+    path: 'photo/:id',
+    component: LogPhotoPage,
+    canActivate: [AuthGuard],
+    data: {role: 'USER', offline: false}
   },
   {
     path: '**',
@@ -33,7 +48,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LogListPage]
+  declarations: [LogListPage, LogEditPage, LogPhotoPage]
 })
-export class LogListPageModule {
+export class LogModule {
 }

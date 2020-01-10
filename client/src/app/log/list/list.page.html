@@ -17,7 +17,7 @@
 
   <ng-container *ngIf="logs$ | async as logs">
     <ion-list lines="none">
-        <ion-card *ngFor="let log of logs" routerLink="./edit/{{log.id}}">
+        <ion-card *ngFor="let log of logs" routerLink="./edit/{{log.id}}" routerDirection="forward">
           <ion-card-header>
             <ion-card-subtitle>{{createdString(log)}}</ion-card-subtitle>
           </ion-card-header>

@@ -14,7 +14,7 @@ import parse from 'date-fns/parse';
   styleUrls: ['./edit.page.scss'],
 })
 export class LogEditPage implements OnInit {
-
+  online = true;
   selectedLog: Log;
   createdString: string;
 

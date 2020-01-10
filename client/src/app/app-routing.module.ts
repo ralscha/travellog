@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'log',
-    loadChildren: () => import('./log/list/list.module').then(m => m.LogListPageModule),
+    loadChildren: () => import('./log/log.module').then(m => m.LogModule),
     canActivate: [AuthGuard],
     data: {role: 'USER', offline: true}
   },
