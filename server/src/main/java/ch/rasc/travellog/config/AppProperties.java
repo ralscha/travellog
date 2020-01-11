@@ -1,5 +1,6 @@
 package ch.rasc.travellog.config;
 
+import java.nio.file.Path;
 import java.time.Duration;
 
 import javax.validation.constraints.Email;
@@ -20,131 +21,142 @@ import ch.rasc.travellog.service.TokenService;
 @Validated
 public class AppProperties {
 
-  /**
-   * URL to this application. Required for emails
-   */
-  @NotEmpty
-  @URL
-  private String url;
+	/**
+	 * URL to this application. Required for emails
+	 */
+	@NotEmpty
+	@URL
+	private String url;
 
-  /**
-   * Instance identification. Required for token generator
-   * @see TokenService
-   */
-  @NotEmpty
-  @Length(min = 3, max = 3)
-  private String instanceNo;
+	/**
+	 * Instance identification. Required for token generator
+	 * @see TokenService
+	 */
+	@NotEmpty
+	@Length(min = 3, max = 3)
+	private String instanceNo;
 
-  /**
-   * Sender address for emails. Required for emails
-   */
-  @NotEmpty
-  @Email
-  private String defaultEmailSender;
+	/**
+	 * Sender address for emails. Required for emails
+	 */
+	@NotEmpty
+	@Email
+	private String defaultEmailSender;
 
-  /**
-   * How long after the last access an user is going to be inactivated
-   * <p>
-   * Default: 365d
-   */
-  @Nullable
-  private Duration inactiveUserMaxAge;
+	/**
+	 * How long after the last access an user is going to be inactivated
+	 * <p>
+	 * Default: 365d
+	 */
+	@Nullable
+	private Duration inactiveUserMaxAge;
 
-  /**
-   * How long an unconfirmed signed up user stays in the database
-   * <p>
-   * Default: 2 days
-   */
-  @NotNull
-  private Duration signupNotConfirmedUserMaxAge;
+	/**
+	 * How long an unconfirmed signed up user stays in the database
+	 * <p>
+	 * Default: 2 days
+	 */
+	@NotNull
+	private Duration signupNotConfirmedUserMaxAge;
 
-  /**
-   * How long an expired user stays in the database. After that time the user is getting
-   * deleted from the database.
-   * <p>
-   * Default: 365 days
-   */
-  @Nullable
-  private Duration expiredUserMaxAge;
+	/**
+	 * How long an expired user stays in the database. After that time the user is getting
+	 * deleted from the database.
+	 * <p>
+	 * Default: 365 days
+	 */
+	@Nullable
+	private Duration expiredUserMaxAge;
 
-  /**
-   * How long after the last access a session is going to be destroyed
-   * <p>
-   * Default: 30 days
-   */
-  @NotNull
-  private Duration inactiveSessionMaxAge;
+	/**
+	 * How long after the last access a session is going to be destroyed
+	 * <p>
+	 * Default: 30 days
+	 */
+	@NotNull
+	private Duration inactiveSessionMaxAge;
 
-  /**
-   * How long a password reset token is valid
-   * <p>
-   * Default: 1 hour
-   */
-  @NotNull
-  private Duration passwordResetTokenMaxAge;
+	/**
+	 * How long a password reset token is valid
+	 * <p>
+	 * Default: 1 hour
+	 */
+	@NotNull
+	private Duration passwordResetTokenMaxAge;
 
-  public String getUrl() {
-    return this.url;
-  }
+	@NotNull
+	private String photoStorageLocation;
 
-  public void setUrl(String url) {
-    this.url = url;
-  }
+	public String getUrl() {
+		return this.url;
+	}
 
-  public String getDefaultEmailSender() {
-    return this.defaultEmailSender;
-  }
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
-  public void setDefaultEmailSender(String defaultEmailSender) {
-    this.defaultEmailSender = defaultEmailSender;
-  }
+	public String getDefaultEmailSender() {
+		return this.defaultEmailSender;
+	}
 
-  public Duration getInactiveUserMaxAge() {
-    return this.inactiveUserMaxAge;
-  }
+	public void setDefaultEmailSender(String defaultEmailSender) {
+		this.defaultEmailSender = defaultEmailSender;
+	}
 
-  public void setInactiveUserMaxAge(Duration inactiveUserMaxAge) {
-    this.inactiveUserMaxAge = inactiveUserMaxAge;
-  }
+	public Duration getInactiveUserMaxAge() {
+		return this.inactiveUserMaxAge;
+	}
 
-  public Duration getSignupNotConfirmedUserMaxAge() {
-    return this.signupNotConfirmedUserMaxAge;
-  }
+	public void setInactiveUserMaxAge(Duration inactiveUserMaxAge) {
+		this.inactiveUserMaxAge = inactiveUserMaxAge;
+	}
 
-  public void setSignupNotConfirmedUserMaxAge(Duration signupNotConfirmedUserMaxAge) {
-    this.signupNotConfirmedUserMaxAge = signupNotConfirmedUserMaxAge;
-  }
+	public Duration getSignupNotConfirmedUserMaxAge() {
+		return this.signupNotConfirmedUserMaxAge;
+	}
 
-  public Duration getExpiredUserMaxAge() {
-    return this.expiredUserMaxAge;
-  }
+	public void setSignupNotConfirmedUserMaxAge(Duration signupNotConfirmedUserMaxAge) {
+		this.signupNotConfirmedUserMaxAge = signupNotConfirmedUserMaxAge;
+	}
 
-  public void setExpiredUserMaxAge(Duration expiredUserMaxAge) {
-    this.expiredUserMaxAge = expiredUserMaxAge;
-  }
+	public Duration getExpiredUserMaxAge() {
+		return this.expiredUserMaxAge;
+	}
 
-  public Duration getInactiveSessionMaxAge() {
-    return this.inactiveSessionMaxAge;
-  }
+	public void setExpiredUserMaxAge(Duration expiredUserMaxAge) {
+		this.expiredUserMaxAge = expiredUserMaxAge;
+	}
 
-  public void setInactiveSessionMaxAge(Duration inactiveSessionMaxAge) {
-    this.inactiveSessionMaxAge = inactiveSessionMaxAge;
-  }
+	public Duration getInactiveSessionMaxAge() {
+		return this.inactiveSessionMaxAge;
+	}
 
-  public Duration getPasswordResetTokenMaxAge() {
-    return this.passwordResetTokenMaxAge;
-  }
+	public void setInactiveSessionMaxAge(Duration inactiveSessionMaxAge) {
+		this.inactiveSessionMaxAge = inactiveSessionMaxAge;
+	}
 
-  public void setPasswordResetTokenMaxAge(Duration passwordResetTokenMaxAge) {
-    this.passwordResetTokenMaxAge = passwordResetTokenMaxAge;
-  }
+	public Duration getPasswordResetTokenMaxAge() {
+		return this.passwordResetTokenMaxAge;
+	}
 
-  public String getInstanceNo() {
-    return this.instanceNo;
-  }
+	public void setPasswordResetTokenMaxAge(Duration passwordResetTokenMaxAge) {
+		this.passwordResetTokenMaxAge = passwordResetTokenMaxAge;
+	}
 
-  public void setInstanceNo(String instanceNo) {
-    this.instanceNo = instanceNo;
-  }
+	public String getInstanceNo() {
+		return this.instanceNo;
+	}
+
+	public void setInstanceNo(String instanceNo) {
+		this.instanceNo = instanceNo;
+	}
+
+	public String getPhotoStorageLocation() {
+		return photoStorageLocation;
+	}
+
+	public void setPhotoStorageLocation(String photoStorageLocation) {
+		this.photoStorageLocation = photoStorageLocation;
+	}
 
 }

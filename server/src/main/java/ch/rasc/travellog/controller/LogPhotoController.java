@@ -26,6 +26,8 @@ import com.drew.metadata.exif.GpsDirectory;
 
 import ch.rasc.travellog.Application;
 import ch.rasc.travellog.config.security.AppUserDetail;
+import ch.rasc.travellog.dto.PhotoDto;
+import ch.rasc.travellog.service.PhotoStorageService;
 
 @RestController
 @RequestMapping("/be")
@@ -35,8 +37,11 @@ public class LogPhotoController {
 
 	private MessageDigest messageDigest;
 
-	public LogPhotoController(DSLContext dsl) {
+	private final PhotoStorageService photoStorageService;
+	
+	public LogPhotoController(DSLContext dsl, PhotoStorageService photoStorageService) {
 		this.dsl = dsl;
+		this.photoStorageService = photoStorageService;
 
 		try {
 			this.messageDigest = MessageDigest.getInstance("MD5");
@@ -46,6 +51,44 @@ public class LogPhotoController {
 		}
 	}
 
+	/*
+	@GetMapping("fetch_photo/{id}")
+	public ResponseEntity<byte[]> fetchPhoto(@PathVariable("id") String id) throws IOException {
+		return ResponseEntity.ok(this.photoStorageService.fetch(storageId));
+	}
+	
+	@GetMapping("fetch_thumbnail/{id}")
+	public ResponseEntity<byte[]> fetchThumbnail(@PathVariable("id") String id) throws IOException {
+		return ResponseEntity.ok(this.photoStorageService.fetch(storageId));
+	}
+	*/
+	
+	@PostMapping("list_photo")
+	public List<PhotoDto> listPhoto(@AuthenticationPrincipal AppUserDetail userDetails,
+			@RequestParam("id") long id) {
+	return List.of();
+//		this.dsl.select(LOG_PHOTO.ID, LOG_PHOTO.NAME, LOG_PHOTO.MIME_TYPE,
+//				LOG_PHOTO.SIZE, LOG_PHOTO.UPDATED)
+//				.from(LOG_PHOTO)
+//				.join(LOG).onKey()
+//                .join(TRAVEL).onKey()
+//				.where(LOG_PHOTO.ID.eq(id).and(TRAVEL.APP_USER_ID.eq(userDetails.getAppUserId())))
+//				.fetch().stream().map(record -> {
+//				        new PhotoDto(
+//				        		record.get(LOG_PHOTO.ID),
+//				        		record.get(LOG_PHOTO.STORAGE),
+//				        		record.get(LOG_PHOTO.NAME),
+//				        		record.get(LOG_PHOTO.SIZE),
+//				        		record.get(LOG_PHOTO.MIME_TYPE),
+//				        		
+//				        		record.get(LOG_PHOTO.SIZE),
+//				        		record.get(LOG_PHOTO.UPDATED),
+//				        		); 
+//				        });
+		
+		
+	}
+	
 	@PostMapping("delete_photo")
 	public void deletePhoto(@AuthenticationPrincipal AppUserDetail userDetails,
 			@RequestParam("id") long id) {
@@ -120,11 +163,7 @@ public class LogPhotoController {
 			 * clientLog.getLocation(), clientLog.getReport(), now,
 			 * clientLog.getTravelId()) .returning(LOG.ID).fetchOne().getId();
 			 * 
-			 * byte[] thedigest = this.messageDigest
-			 * .digest(text.getBytes(StandardCharsets.UTF_8)); String key = sourceLanguage
-			 * + "-" + targetLanguage + "-" +
-			 * Base64.getEncoder().encodeToString(thedigest);
-			 * 
+
 			 * 
 			 * // thumbnail on server
 			 * 
@@ -148,3 +187,30 @@ public class LogPhotoController {
 	}
 
 }
+
+
+/*
+   source file
+		File file = new File("movie.mp4");
+
+		 check content type of the file
+		String contentType = Files.probeContentType(file.toPath());
+
+		 read data as byte[]
+		byte[] data = Files.readAllBytes(file.toPath());
+
+		 convert byte[] to base64(java7)
+		String base64str = DatatypeConverter.printBase64Binary(data);
+
+		 convert byte[] to base64(java8)
+		 String base64str = Base64.getEncoder().encodeToString(data);
+
+		 cretate "data URI"
+		StringBuilder sb = new StringBuilder();
+		sb.append("data:");
+		sb.append(contentType);
+		sb.append(";base64,");
+		sb.append(base64str);
+
+		System.out.println(sb.toString());
+*/
