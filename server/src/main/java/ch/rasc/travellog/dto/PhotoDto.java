@@ -16,7 +16,8 @@ public class PhotoDto {
 
 	private final long updated;
 
-	public PhotoDto(long id, String storage, String name, long size, String mimeType,
+	public PhotoDto(long id, String storage, 
+			String name, long size, String mimeType,
 			String thumbnailDataUrl, long updated) {
 		this.id = id;
 		this.storage = storage;
