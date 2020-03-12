@@ -148,7 +148,7 @@ public class LogPhotoController {
 				
 				GeoLocation geoLocation = gpsDirectory.getGeoLocation();
 				if (geoLocation != null && !geoLocation.isZero()) {
-					geoLocation.
+				//TODO:	geoLocation.
 				}
 
 				BufferedImage bi = ImageIO.read(file.getInputStream());
@@ -162,16 +162,16 @@ public class LogPhotoController {
 					
 					byte[] b = baos.toByteArray();
 					
-					long id = this.dsl .insertInto(LOG, 
-							  LOG.CREATED, LOG.LAT, LOG.LNG,
-							  LOG.LOCATION, LOG.REPORT, LOG.UPDATED, LOG.TRAVEL_ID) 
-							  .values(LocalDateTime.ofInstant(Instant.ofEpochSecond(
-							  clientLog.getCreated()), ZoneOffset.UTC), 
-							  clientLog.getLat(), 
-							  clientLog.getLng(),
-							  clientLog.getLocation(), 
-							  clientLog.getReport(), now,
-							  clientLog.getTravelId()).returning(LOG.ID).fetchOne().getId();
+//					long id = this.dsl .insertInto(LOG, 
+//							  LOG.CREATED, LOG.LAT, LOG.LNG,
+//							  LOG.LOCATION, LOG.REPORT, LOG.UPDATED, LOG.TRAVEL_ID) 
+//							  .values(LocalDateTime.ofInstant(Instant.ofEpochSecond(
+//							  clientLog.getCreated()), ZoneOffset.UTC), 
+//							  clientLog.getLat(), 
+//							  clientLog.getLng(),
+//							  clientLog.getLocation(), 
+//							  clientLog.getReport(), now,
+//							  clientLog.getTravelId()).returning(LOG.ID).fetchOne().getId();
 					
 				}
 
