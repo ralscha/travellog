@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {AppDatabase} from '../model/app-database';
 import {Travel} from '../model/travel';
 import {SyncService} from './sync.service';
-import {first} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +11,6 @@ export class TravelService extends SyncService<Travel> {
 
   constructor(httpClient: HttpClient, appDatabase: AppDatabase) {
     super(httpClient, appDatabase);
-  }
-
-  protected changed(oldEntry: Travel, newEntry: Travel): boolean {
-    return oldEntry.name !== newEntry.name;
-  }
-
-  protected getTableName(): string {
-    return 'travel';
-  }
-
-  protected getUrlPrefix(): string {
-    return 'travel';
   }
 
   async getDefaultTravelId(): Promise<number> {
@@ -43,6 +30,18 @@ export class TravelService extends SyncService<Travel> {
       return (await this.appDatabase.travel.get(travelId)).name;
     }
     return null;
+  }
+
+  protected changed(oldEntry: Travel, newEntry: Travel): boolean {
+    return oldEntry.name !== newEntry.name;
+  }
+
+  protected getTableName(): string {
+    return 'travel';
+  }
+
+  protected getUrlPrefix(): string {
+    return 'travel';
   }
 
 }

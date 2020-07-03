@@ -17,7 +17,7 @@
 
   <ng-container *ngIf="travels$ | async as travels">
     <ion-list lines="full">
-      <ion-item *ngFor="let travel of travels" detail="true" routerLink="./edit/{{travel.id}}">
+      <ion-item *ngFor="let travel of travels" [detail]="true" routerLink="./edit/{{travel.id}}">
         <ion-label>{{travel.name}}</ion-label>
       </ion-item>
     </ion-list>

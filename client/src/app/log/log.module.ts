@@ -6,7 +6,6 @@ import {IonicModule} from '@ionic/angular';
 import {LogListPage} from './list/list.page';
 import {LogEditPage} from './edit/edit.page';
 import {LogPhotoPage} from './photo/photo.page';
-import {HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from '../service/auth.guard';
 
 const routes: Routes = [

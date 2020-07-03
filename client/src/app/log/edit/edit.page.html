@@ -8,7 +8,7 @@
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="deleteLog()">
-        <ion-icon slot="icon-only" name="trash"></ion-icon>
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -25,7 +25,7 @@
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-item>
             <ion-label position="stacked">Time</ion-label>
-            <ion-input #time="ngModel" [ngModel]="createdString" name="time" required></ion-input>
+            <ion-input #time="ngModel" [ngModel]="createdString" name="time" [required]="true"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -43,7 +43,7 @@
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-item>
             <ion-label position="stacked">Latitude</ion-label>
-            <ion-input type="number" #lat="ngModel" [ngModel]="selectedLog.lat" name="lat" required></ion-input>
+            <ion-input #lat="ngModel" [ngModel]="selectedLog.lat" name="lat" [required]="true" type="number"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -61,7 +61,7 @@
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-item>
             <ion-label position="stacked">Longitude</ion-label>
-            <ion-input type="number" #lng="ngModel" [ngModel]="selectedLog.lng" name="lng" required></ion-input>
+            <ion-input #lng="ngModel" [ngModel]="selectedLog.lng" name="lng" [required]="true" type="number"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -77,7 +77,7 @@
 
       <ion-row>
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
-          <ion-button expand="block" size="small" type="button" (click)="refreshLocation()">Update Lat/Lng</ion-button>
+          <ion-button (click)="refreshLocation()" expand="block" size="small" type="button">Update Lat/Lng</ion-button>
         </ion-col>
       </ion-row>
 
@@ -85,7 +85,7 @@
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-item>
             <ion-label position="stacked">Location</ion-label>
-            <ion-input #location="ngModel" [ngModel]="selectedLog.location" name="location" required></ion-input>
+            <ion-input #location="ngModel" [ngModel]="selectedLog.location" name="location" [required]="true"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -103,7 +103,7 @@
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-item>
             <ion-label position="stacked">Report</ion-label>
-            <ion-textarea rows="6" [ngModel]="selectedLog.report" name="report"></ion-textarea>
+            <ion-textarea [ngModel]="selectedLog.report" name="report" [rows]="6"></ion-textarea>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -116,7 +116,9 @@
 
       <ion-row *ngIf="online && selectedLog.id > 0">
         <ion-col class="ion-margin-top" offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
-          <ion-button expand="block" type="button" routerLink="/log/photo/{{selectedLog.id}}" routerDirection="forward">Photos</ion-button>
+          <ion-button expand="block" routerDirection="forward" routerLink="/log/photo/{{selectedLog.id}}" type="button">
+            Photos
+          </ion-button>
         </ion-col>
       </ion-row>
 

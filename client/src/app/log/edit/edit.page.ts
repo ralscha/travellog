@@ -83,15 +83,15 @@ export class LogEditPage implements OnInit {
     await this.router.navigate(['/log']);
   }
 
-  private async reallyDeleteLog() {
-    await this.logService.delete(this.selectedLog);
-    await this.router.navigate(['/log']);
-  }
-
   refreshLocation() {
     navigator.geolocation.getCurrentPosition(pos => {
       this.selectedLog.lat = pos.coords.latitude;
       this.selectedLog.lng = pos.coords.longitude;
     });
+  }
+
+  private async reallyDeleteLog() {
+    await this.logService.delete(this.selectedLog);
+    await this.router.navigate(['/log']);
   }
 }

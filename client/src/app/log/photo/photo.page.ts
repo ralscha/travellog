@@ -13,7 +13,7 @@ export class LogPhotoPage implements OnInit {
   private logIdString: string;
 
   constructor(private readonly httpClient: HttpClient,
-              private readonly route: ActivatedRoute,) {
+              private readonly route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class LogPhotoPage implements OnInit {
     this.httpClient.post<void>(`/be/upload_photo`, formData)
       .subscribe(ok => {
       });
-    
+
     event.target.value = null;
   }
 
