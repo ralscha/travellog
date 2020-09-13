@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Log} from './log';
 import format from 'date-fns/format';
@@ -11,20 +11,21 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class LogComponent implements OnInit {
 
-  travellog: string;
+  travellog: string | null = null;
 
   zoom = 8;
   lat = 51.673858;
   lng = 7.815982;
 
-  selectedLog: Log = null;
+  selectedLog: Log | null = null;
 
   logs: Log[] = [];
 
   constructor(private readonly httpClient: HttpClient,
-              private readonly route: ActivatedRoute) { }
+              private readonly route: ActivatedRoute) {
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const id = this.route.snapshot.params.id;
 
     this.httpClient.get(`/be/logview_name/${id}`, {responseType: 'text'}).subscribe(response => this.travellog = response);
@@ -36,12 +37,12 @@ export class LogComponent implements OnInit {
     });
   }
 
-  onLogClick(log: Log) {
+  onLogClick(log: Log): void {
     console.log(log);
     this.selectedLog = log;
   }
 
-  createdString(log: Log) {
+  createdString(log: Log): string {
     return format(log.created * 1000, 'yyyy-MM-dd HH:mm');
   }
 

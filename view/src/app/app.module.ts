@@ -5,13 +5,13 @@ import {AgmCoreModule} from '@agm/core';
 import {LogComponent} from './log/log.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 
 const routes: Routes = [{
-    path: 'log/:id',
-    component: LogComponent
-  }];
+  path: 'log/:id',
+  component: LogComponent
+}];
 
 @NgModule({
   declarations: [
