@@ -28,6 +28,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
       return this.appDatabase.authenticationToken.limit(1).first();
     };
 
+    // @ts-ignore
     return from(tokenGetter()).pipe(mergeMap(
       (token: string) => {
 

@@ -8,12 +8,12 @@ import {Log} from './log';
   providedIn: 'root'
 })
 export class AppDatabase extends Dexie {
-  authenticationToken: Dexie.Table<string, number>;
-  defaultTravel: Dexie.Table<number, number>;
-  invalidAuthenticationTokens: Dexie.Table<string, number>;
-  travel: Dexie.Table<Travel, number>;
-  log: Dexie.Table<Log, number>;
-  errors: Dexie.Table<ClientError, string>;
+  authenticationToken!: Dexie.Table<string, number>;
+  defaultTravel!: Dexie.Table<number, number>;
+  invalidAuthenticationTokens!: Dexie.Table<string, number>;
+  travel!: Dexie.Table<Travel, number>;
+  log!: Dexie.Table<Log, number>;
+  errors!: Dexie.Table<ClientError, string>;
 
   constructor() {
     super('TravelLogDatabase');

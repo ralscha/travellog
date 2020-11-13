@@ -18,7 +18,7 @@ export class SignupPage {
               private readonly messagesService: MessagesService) {
   }
 
-  async signup(email: string, password: string) {
+  async signup(email: string, password: string): Promise<void> {
     const loading = await this.messagesService.showLoading('Signing up');
     this.submitError = null;
 

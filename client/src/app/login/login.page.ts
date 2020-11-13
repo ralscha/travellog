@@ -17,7 +17,7 @@ export class LoginPage {
               private readonly messagesService: MessagesService) {
   }
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<void> {
     const loading = await this.messagesService.showLoading('Logging in');
 
     this.authService.login(email, password)
@@ -36,16 +36,16 @@ export class LoginPage {
   }
 
   @HostListener('window:keydown', ['$event'])
-  onKeyDown(event) {
+  onKeyDown(event: any): void {
     this.capslockOn = event.getModifierState && event.getModifierState('CapsLock');
   }
 
   @HostListener('window:keyup', ['$event'])
-  onKeyUp(event) {
+  onKeyUp(event: any): void {
     this.capslockOn = event.getModifierState && event.getModifierState('CapsLock');
   }
 
-  private showLoginFailedToast() {
+  private showLoginFailedToast(): void {
     this.messagesService.showErrorToast('Login failed');
   }
 

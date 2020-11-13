@@ -24,7 +24,7 @@ export class AccountPage {
               private readonly alertController: AlertController) {
   }
 
-  async deleteAccount(password: string) {
+  async deleteAccount(password: string): Promise<void> {
     this.submitError = null;
 
     const alert = await this.alertController.create({
@@ -48,7 +48,7 @@ export class AccountPage {
 
   }
 
-  private async reallyDeleteAccount(password: string) {
+  private async reallyDeleteAccount(password: string): Promise<void> {
     const loading = await this.messagesService.showLoading('Deleting account');
 
     this.profileService.deleteAccount(password)

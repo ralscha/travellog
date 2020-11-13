@@ -23,7 +23,7 @@ export class PasswordPage {
               private readonly messagesService: MessagesService) {
   }
 
-  async changePassword(oldPassword: string, newPassword: string) {
+  async changePassword(oldPassword: string, newPassword: string): Promise<void> {
 
     const loading = await this.messagesService.showLoading('Changing password');
     this.submitError = null;

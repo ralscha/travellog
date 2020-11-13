@@ -15,8 +15,8 @@ import parse from 'date-fns/parse';
 })
 export class LogEditPage implements OnInit {
   online = true;
-  selectedLog: Log;
-  createdString: string;
+  selectedLog!: Log;
+  createdString!: string;
 
   constructor(private readonly route: ActivatedRoute,
               private readonly router: Router,
@@ -25,7 +25,7 @@ export class LogEditPage implements OnInit {
               private readonly logService: LogService) {
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     const logIdString = this.route.snapshot.paramMap.get('id');
     if (logIdString) {
       this.selectedLog = await this.logService.getEntry(parseInt(logIdString, 10));
@@ -49,7 +49,7 @@ export class LogEditPage implements OnInit {
     }
   }
 
-  async deleteLog() {
+  async deleteLog(): Promise<void> {
     if (this.selectedLog) {
       const alert = await this.alertController.create({
         header: 'Delete Log',
@@ -68,7 +68,7 @@ export class LogEditPage implements OnInit {
     }
   }
 
-  async save(form: NgForm) {
+  async save(form: NgForm): Promise<void> {
     const createdDate = parse(form.value.time, 'yyyy-MM-dd HH:mm', new Date());
 
     this.selectedLog.created = createdDate.getTime() / 1000;
@@ -83,14 +83,14 @@ export class LogEditPage implements OnInit {
     await this.router.navigate(['/log']);
   }
 
-  refreshLocation() {
+  refreshLocation(): void {
     navigator.geolocation.getCurrentPosition(pos => {
       this.selectedLog.lat = pos.coords.latitude;
       this.selectedLog.lng = pos.coords.longitude;
     });
   }
 
-  private async reallyDeleteLog() {
+  private async reallyDeleteLog(): Promise<void> {
     await this.logService.delete(this.selectedLog);
     await this.router.navigate(['/log']);
   }

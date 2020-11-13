@@ -22,7 +22,7 @@ export class TravelEditPage implements OnInit {
               private readonly travelService: TravelService) {
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     const travelIdString = this.route.snapshot.paramMap.get('id');
     if (travelIdString) {
       this.selectedTravel = await this.travelService.getEntry(parseInt(travelIdString, 10));
@@ -35,7 +35,7 @@ export class TravelEditPage implements OnInit {
     }
   }
 
-  async deleteTravel() {
+  async deleteTravel(): Promise<void> {
     if (this.selectedTravel) {
       const alert = await this.alertController.create({
         header: 'Delete Travel',
@@ -54,7 +54,7 @@ export class TravelEditPage implements OnInit {
     }
   }
 
-  async save(form: NgForm) {
+  async save(form: NgForm): Promise<void> {
     this.selectedTravel.name = form.value.name;
     await this.travelService.save(this.selectedTravel);
     await this.messagesService.showSuccessToast('Travel successfully saved', 1000);
@@ -66,7 +66,7 @@ export class TravelEditPage implements OnInit {
     return this.selectedTravel?.id > 0 && navigator.share;
   }
 
-  async share() {
+  async share(): Promise<void> {
     // @ts-ignore
     navigator.share({
       title: 'TravelLog',
@@ -75,7 +75,7 @@ export class TravelEditPage implements OnInit {
     });
   }
 
-  private async reallyDeleteTravel() {
+  private async reallyDeleteTravel(): Promise<void> {
     await this.travelService.delete(this.selectedTravel);
     await this.router.navigate(['/travel']);
   }

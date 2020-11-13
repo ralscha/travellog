@@ -17,7 +17,7 @@ export class EmailChangeConfirmPage implements OnInit {
               private readonly messagesService: MessagesService) {
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     const token = this.route.snapshot.paramMap.get('token');
 
     if (!token) {

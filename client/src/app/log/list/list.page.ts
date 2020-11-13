@@ -19,7 +19,7 @@ export class LogListPage implements OnInit {
               private readonly travelService: TravelService) {
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.selectedTravel = await this.travelService.getDefaultTravelName();
     const selectedTravelId = await this.travelService.getDefaultTravelId();
     if (selectedTravelId) {
@@ -29,12 +29,12 @@ export class LogListPage implements OnInit {
     }
   }
 
-  refresh(event) {
+  refresh(event: any): void {
     this.logService.requestSync()
       .finally(() => event.target.complete());
   }
 
-  createdString(log: Log) {
+  createdString(log: Log): string {
     return format(log.created * 1000, 'yyyy-MM-dd HH:mm');
   }
 

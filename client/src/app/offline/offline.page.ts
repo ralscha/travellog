@@ -16,7 +16,7 @@ export class OfflinePage implements OnInit, OnDestroy {
               private readonly router: Router) {
   }
 
-  reconnect() {
+  reconnect(): void {
     this.connectionService.reconnect();
   }
 

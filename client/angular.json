@@ -34,8 +34,8 @@
               "src/manifest.json"
             ],
             "styles": [
-              "node_modules/@fortawesome/fontawesome-pro/css/regular.css",
-              "node_modules/@fortawesome/fontawesome-pro/css/fontawesome.css",
+              "node_modules/@fortawesome/fontawesome-free/css/regular.css",
+              "node_modules/@fortawesome/fontawesome-free/css/fontawesome.css",
               "src/variables.scss",
               "src/styles.scss"
             ],
@@ -52,7 +52,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,

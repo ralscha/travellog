@@ -21,35 +21,35 @@ export class UsersPage implements OnInit {
   constructor(private readonly httpClient: HttpClient) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.allUsers$ = this.httpGetUsers.pipe(shareReplay());
     this.users$ = this.allUsers$;
   }
 
-  refresh(event) {
+  refresh(event: any): void {
     this.allUsers$ = this.httpGetUsers.pipe(tap(() => event.target.complete()), shareReplay());
     this.doFilter();
   }
 
-  activate(user: User, slidingItem: IonItemSliding) {
+  activate(user: User, slidingItem: IonItemSliding): void {
     slidingItem.close();
     this.httpClient.post<void>('/be/admin/activate', user.id)
       .subscribe(() => user.expired = false);
   }
 
-  disable(user: User, slidingItem: IonItemSliding) {
+  disable(user: User, slidingItem: IonItemSliding): void {
     slidingItem.close();
     this.httpClient.post<void>('/be/admin/disable', user.id)
       .subscribe(() => user.enabled = false);
   }
 
-  enable(user: User, slidingItem: IonItemSliding) {
+  enable(user: User, slidingItem: IonItemSliding): void {
     slidingItem.close();
     this.httpClient.post<void>('/be/admin/enable', user.id)
       .subscribe(() => user.enabled = true);
   }
 
-  delete(user: User, slidingItem: IonItemSliding) {
+  delete(user: User, slidingItem: IonItemSliding): void {
     slidingItem.close();
     this.httpClient.post<void>('/be/admin/delete', user.id)
       .subscribe(() => {
@@ -57,12 +57,12 @@ export class UsersPage implements OnInit {
       });
   }
 
-  onSearch(event) {
+  onSearch(event: any): void {
     this.searchFilter = event.target.value;
     this.doFilter();
   }
 
-  onFilterChange(event) {
+  onFilterChange(event: any): void {
     this.selectFilter = event.target.value;
     this.doFilter();
   }
@@ -96,7 +96,7 @@ export class UsersPage implements OnInit {
     this.filter(user => filterFns.every(fn => fn(user)));
   }
 
-  private filter(filterFn: (user: User) => boolean) {
+  private filter(filterFn: (user: User) => boolean): void {
     this.users$ = this.allUsers$.pipe(
       mergeMap(users => users),
       filter(filterFn),

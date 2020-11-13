@@ -24,7 +24,7 @@ export class AppGlobalErrorhandler implements ErrorHandler {
       .subscribe(noop, noop);
   }
 
-  async handleError(error) {
+  async handleError(error: any): Promise<void> {
     if (!environment.production) {
       console.error(error);
     }

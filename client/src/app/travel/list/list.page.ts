@@ -15,12 +15,12 @@ export class TravelListPage implements OnInit {
   constructor(private readonly travelService: TravelService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.travels$ = this.travelService.getObservable();
     this.travelService.requestSync();
   }
 
-  refresh(event) {
+  refresh(event: any): void {
     this.travelService.requestSync()
       .finally(() => event.target.complete());
   }

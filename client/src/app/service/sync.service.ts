@@ -24,32 +24,37 @@ export abstract class SyncService<T extends SyncEntry> {
   }
 
   getEntry(id: number): Promise<T> {
+    // @ts-ignore
     return this.appDatabase[this.getTableName()].get(id);
   }
 
-  async delete(entry: T) {
+  async delete(entry: T): Promise<void> {
     entry.ts = -1;
+    // @ts-ignore
     await this.appDatabase[this.getTableName()].put(entry);
     this.requestSync().catch(e => console.log(e));
   }
 
-  async save(entry: T) {
+  async save(entry: T): Promise<void> {
     if (!entry.id) {
       entry.id = await this.getNextNewId();
       entry.ts = Math.floor(Date.now() / 1000);
+      // @ts-ignore
       await this.appDatabase[this.getTableName()].add(entry);
       this.requestSync().catch(e => console.log(e));
     } else {
+      // @ts-ignore
       const oldEntry = await this.appDatabase[this.getTableName()].get(entry.id);
       if (this.changed(oldEntry, entry)) {
         entry.ts = Math.floor(Date.now() / 1000);
+        // @ts-ignore
         await this.appDatabase[this.getTableName()].put(entry);
         this.requestSync().catch(e => console.log(e));
       }
     }
   }
 
-  async requestSync() {
+  async requestSync(): Promise<void> {
     this.updateSubject();
 
     const syncViewObject = await this.httpClient.get<{ [key: string]: number }>(`/be/${this.getUrlPrefix()}_syncview`).toPromise();
@@ -64,8 +69,9 @@ export abstract class SyncService<T extends SyncEntry> {
       gets: []
     };
 
-    const deleteLocal = [];
+    const deleteLocal: any[] = [];
 
+    // @ts-ignore
     await this.appDatabase[this.getTableName()].toCollection().each(entry => {
       const serverTimestamp = syncView.get(entry.id);
       if (serverTimestamp) {
@@ -93,6 +99,7 @@ export abstract class SyncService<T extends SyncEntry> {
     // delete local entry
     let deleted = false;
     for (const id of deleteLocal) {
+      // @ts-ignore
       await this.appDatabase[this.getTableName()].delete(id);
       deleted = true;
     }
@@ -112,27 +119,37 @@ export abstract class SyncService<T extends SyncEntry> {
     const syncResponse = await this.httpClient.post<SyncResponse<T>>(`/be/${this.getUrlPrefix()}_sync`,
       syncRequest).toPromise();
 
+    // @ts-ignore
     await this.appDatabase.transaction('rw', this.appDatabase[this.getTableName()], async () => {
       if (syncResponse.gets && syncResponse.gets.length > 0) {
+        // @ts-ignore
         await this.appDatabase[this.getTableName()].bulkPut(syncResponse.gets);
       }
       if (syncResponse.inserted) {
-        Object.entries(syncResponse.inserted).forEach(
-          async (kv) => {
-            const oldId = parseInt(kv[0], 10);
-            const travelFromDb = await this.appDatabase[this.getTableName()].get(oldId);
-            travelFromDb.id = kv[1].id;
-            travelFromDb.ts = kv[1].ts;
-            await this.appDatabase[this.getTableName()].delete(oldId);
-            await this.appDatabase[this.getTableName()].add(travelFromDb);
-          });
+        for (const kv of Object.entries(syncResponse.inserted)) {
+          const oldId = parseInt(kv[0], 10);
+          // @ts-ignore
+          const travelFromDb = await this.appDatabase[this.getTableName()].get(oldId);
+          travelFromDb.id = kv[1].id;
+          travelFromDb.ts = kv[1].ts;
+          // @ts-ignore
+          await this.appDatabase[this.getTableName()].delete(oldId);
+          // @ts-ignore
+          await this.appDatabase[this.getTableName()].add(travelFromDb);
+        }
       }
       if (syncResponse.updated) {
-        Object.entries(syncResponse.updated).forEach(
-          async (kv) => await this.appDatabase[this.getTableName()].update(parseInt(kv[0], 10), {ts: kv[1]}));
+        // @ts-ignore
+        for (const kv of Object.entries(syncResponse.updated)) {
+          // @ts-ignore
+          await this.appDatabase[this.getTableName()].update(parseInt(kv[0], 10), {ts: kv[1]});
+        }
       }
       if (syncResponse.removed) {
-        syncResponse.removed.forEach(async (id) => await this.appDatabase[this.getTableName()].delete(id));
+        for (const id of syncResponse.removed) {
+          // @ts-ignore
+          await this.appDatabase[this.getTableName()].delete(id);
+        }
       }
     });
 
@@ -146,13 +163,15 @@ export abstract class SyncService<T extends SyncEntry> {
 
   protected abstract getUrlPrefix(): string;
 
-  protected updateSubject() {
+  protected updateSubject(): void {
+    // @ts-ignore
     this.appDatabase[this.getTableName()].where('ts').notEqual(-1).toArray().then(travel => {
       this.subject.next(travel);
     });
   }
 
-  private async getNextNewId() {
+  private async getNextNewId(): Promise<number> {
+    // @ts-ignore
     const first = await this.appDatabase[this.getTableName()].toCollection().first();
     if (first) {
       if (first.id > 0) {

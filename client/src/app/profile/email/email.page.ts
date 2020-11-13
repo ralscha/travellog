@@ -16,7 +16,7 @@ export class EmailPage {
               private readonly messagesService: MessagesService) {
   }
 
-  async changeEmail(newEmail: string, password: string) {
+  async changeEmail(newEmail: string, password: string): Promise<void> {
     const loading = await this.messagesService.showLoading('Saving email change request');
     this.submitError = null;
 

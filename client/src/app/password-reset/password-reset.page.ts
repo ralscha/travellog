@@ -19,7 +19,7 @@ export class PasswordResetPage implements OnInit {
               private readonly messagesService: MessagesService) {
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.resetToken = this.route.snapshot.paramMap.get('token');
 
     if (!this.resetToken) {
@@ -27,7 +27,7 @@ export class PasswordResetPage implements OnInit {
     }
   }
 
-  async reset(password: string) {
+  async reset(password: string): Promise<void> {
     const loading = await this.messagesService.showLoading('Changing Password');
 
     this.authService.resetPassword(this.resetToken, password)

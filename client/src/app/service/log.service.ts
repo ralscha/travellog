@@ -15,11 +15,11 @@ export class LogService extends SyncService<Log> {
     super(httpClient, appDatabase);
   }
 
-  setTravelId(travelId: number) {
+  setTravelId(travelId: number): void {
     this.travelId = travelId;
   }
 
-  getTravelId() {
+  getTravelId(): number {
     return this.travelId;
   }
 
@@ -31,7 +31,8 @@ export class LogService extends SyncService<Log> {
       || oldEntry.lng !== newEntry.lng;
   }
 
-  protected updateSubject() {
+  protected updateSubject(): void {
+    // @ts-ignore
     this.appDatabase[this.getTableName()].where('ts').notEqual(-1).and(log => log.travelId === this.travelId).toArray().then(log => {
       this.subject.next(log);
     });
