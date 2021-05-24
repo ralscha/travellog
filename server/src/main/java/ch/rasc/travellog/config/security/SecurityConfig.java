@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,7 +48,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     http
     .headers(customizer -> customizer.defaultsDisabled().cacheControl())
     .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-    .csrf(customizer -> customizer.disable())
+    .csrf(CsrfConfigurer::disable)
   	.logout(customizer -> {
   	  customizer.logoutSuccessHandler(this.appLogoutSuccessHandler);
   	  customizer.logoutUrl(pathPrefix + "/logout");

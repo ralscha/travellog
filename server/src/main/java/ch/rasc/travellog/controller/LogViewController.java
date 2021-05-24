@@ -24,15 +24,13 @@ class LogViewController {
   public LogViewController(DSLContext dsl) {
     this.dsl = dsl;
   }
-  
+
   @GetMapping("logview_name/{id}")
   public String logviewname(@PathVariable("id") long travelId) {
-    return this.dsl.select(TRAVEL.NAME)
-               .from(TRAVEL)
-               .where(TRAVEL.ID.eq(travelId))
-               .fetchOne(TRAVEL.NAME);
+    return this.dsl.select(TRAVEL.NAME).from(TRAVEL).where(TRAVEL.ID.eq(travelId))
+        .fetchOne(TRAVEL.NAME);
   }
-  
+
   @GetMapping("logview/{id}")
   public List<LogSync> logs(@PathVariable("id") long travelId) {
 

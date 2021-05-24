@@ -39,7 +39,7 @@ public class EmailService {
 
     private final String fileName;
 
-    private EmailTemplate(String fileName) {
+    EmailTemplate(String fileName) {
       this.fileName = fileName;
     }
 
