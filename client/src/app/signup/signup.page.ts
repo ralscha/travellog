@@ -11,7 +11,7 @@ import {MessagesService} from '../service/messages.service';
 export class SignupPage {
 
   signUpSent = false;
-  submitError: string = null;
+  submitError: string | null = null;
 
   constructor(private readonly navCtrl: NavController,
               private readonly authService: AuthService,

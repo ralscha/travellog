@@ -26,7 +26,7 @@ export class LogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params.id;
+    const id = this.route.snapshot.params['id'];
 
     this.httpClient.get(`/be/logview_name/${id}`, {responseType: 'text'}).subscribe(response => this.travellog = response);
     this.httpClient.get<Log[]>(`/be/logview/${id}`).subscribe(response => {

@@ -13,7 +13,7 @@ import {Travel} from '../../model/travel';
 })
 export class TravelEditPage implements OnInit {
 
-  selectedTravel: Travel;
+  selectedTravel!: Travel;
 
   constructor(private readonly route: ActivatedRoute,
               private readonly router: Router,
@@ -28,8 +28,8 @@ export class TravelEditPage implements OnInit {
       this.selectedTravel = await this.travelService.getEntry(parseInt(travelIdString, 10));
     } else {
       this.selectedTravel = {
-        id: null,
-        name: null,
+        id: -1,
+        name: "",
         ts: 0
       };
     }

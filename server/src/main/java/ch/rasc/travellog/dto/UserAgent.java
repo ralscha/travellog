@@ -8,9 +8,7 @@ public class UserAgent {
 
   private String userAgent;
 
-  private int connectionDownlink;
-
-  private String connectionEffectiveType;
+  private String connectionType;
 
   public UserAgent() {
   }
@@ -39,28 +37,18 @@ public class UserAgent {
     this.userAgent = userAgent;
   }
 
-  public int getConnectionDownlink() {
-    return this.connectionDownlink;
+  public String getConnectionType() {
+    return connectionType;
   }
 
-  public void setConnectionDownlink(int connectionDownlink) {
-    this.connectionDownlink = connectionDownlink;
-  }
-
-  public String getConnectionEffectiveType() {
-    return this.connectionEffectiveType;
-  }
-
-  public void setConnectionEffectiveType(String connectionEffectiveType) {
-    this.connectionEffectiveType = connectionEffectiveType;
+  public void setConnectionType(String connectionType) {
+    this.connectionType = connectionType;
   }
 
   @Override
   public String toString() {
-    return "UserAgent [language=" + this.language + ", platform=" + this.platform
-        + ", userAgent=" + this.userAgent + ", connectionDownlink="
-        + this.connectionDownlink + ", connectionEffectiveType="
-        + this.connectionEffectiveType + "]";
+    return "UserAgent [language=" + language + ", platform=" + platform + ", userAgent="
+        + userAgent + ", connectionType=" + connectionType + "]";
   }
 
 }

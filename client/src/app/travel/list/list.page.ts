@@ -10,7 +10,7 @@ import {TravelService} from '../../service/travel.service';
 })
 export class TravelListPage implements OnInit {
 
-  travels$: Observable<Travel[]>;
+  travels$!: Observable<Travel[]>;
 
   constructor(private readonly travelService: TravelService) {
   }

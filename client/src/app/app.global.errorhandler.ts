@@ -19,7 +19,7 @@ export class AppGlobalErrorhandler implements ErrorHandler {
         switchMap(() => from(this.appDatabase.errors.toArray())),
         filter(errors => errors.length > 0),
         switchMap(errors => this.httpClient.post<void>('/be/client-error', errors).pipe(mapTo(errors))),
-        switchMap(errors => this.appDatabase.errors.bulkDelete(errors.map(error => error.id)))
+        switchMap(errors => this.appDatabase.errors.bulkDelete(errors.map(error => ""+error.id)))
       )
       .subscribe(noop, noop);
   }
@@ -36,8 +36,7 @@ export class AppGlobalErrorhandler implements ErrorHandler {
       language: navigator.language,
       platform: navigator.platform,
       userAgent: navigator.userAgent,
-      connectionDownlink: connection ? connection.downlink : null,
-      connectionEffectiveType: connection ? connection.effectiveType : null
+      connectionType: connection?.type,
     };
 
     const errorMsg = error && error.message ? error.message : error;

@@ -31,7 +31,7 @@ export class LogService extends SyncService<Log> {
       || oldEntry.lng !== newEntry.lng;
   }
 
-  protected updateSubject(): void {
+  protected override updateSubject(): void {
     // @ts-ignore
     this.appDatabase[this.getTableName()].where('ts').notEqual(-1).and(log => log.travelId === this.travelId).toArray().then(log => {
       this.subject.next(log);

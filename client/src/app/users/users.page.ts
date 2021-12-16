@@ -12,11 +12,11 @@ import {IonItemSliding} from '@ionic/angular';
 })
 export class UsersPage implements OnInit {
 
-  users$: Observable<User[]>;
-  private allUsers$: Observable<User[]>;
+  users$!: Observable<User[]>;
+  private allUsers$!: Observable<User[]>;
   private httpGetUsers: Observable<User[]> = this.httpClient.get<User[]>('/be/admin/users');
-  private searchFilter: string = null;
-  private selectFilter: string = null;
+  private searchFilter: string | null = null;
+  private selectFilter: string | null = null;
 
   constructor(private readonly httpClient: HttpClient) {
   }
@@ -90,7 +90,7 @@ export class UsersPage implements OnInit {
     }
 
     if (this.searchFilter) {
-      filterFns.push(user => user.email.includes(this.searchFilter));
+      filterFns.push(user => user.email.includes(this.searchFilter!));
     }
 
     this.filter(user => filterFns.every(fn => fn(user)));

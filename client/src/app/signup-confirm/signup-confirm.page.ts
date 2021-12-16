@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class SignupConfirmPage implements OnInit {
 
-  success: boolean;
+  success!: boolean;
 
   constructor(private readonly authService: AuthService,
               private readonly route: ActivatedRoute,
