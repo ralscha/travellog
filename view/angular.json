@@ -65,8 +65,8 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
-          }
-        },
+            }
+          },
           "defaultConfiguration": "production"
         },
         "serve": {
@@ -74,7 +74,7 @@
           "options": {
             "browserTarget": "app:build",
             "proxyConfig": "proxy.conf.json"
-          },          
+          },
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
@@ -97,8 +97,9 @@
       }
     }
   },
-  "defaultProject": "app",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
