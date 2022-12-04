@@ -6,7 +6,7 @@ package ch.rasc.travellog.db.tables.records;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import javax.annotation.processing.Generated;
+import jakarta.annotation.processing.Generated;
 
 import org.jooq.Field;
 import org.jooq.Record1;

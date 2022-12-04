@@ -5,7 +5,7 @@ import static ch.rasc.travellog.db.tables.AppUser.APP_USER;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 import org.hashids.Hashids;
 import org.jooq.DSLContext;

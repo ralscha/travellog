@@ -6,9 +6,9 @@ import static ch.rasc.travellog.db.tables.AppUser.APP_USER;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;

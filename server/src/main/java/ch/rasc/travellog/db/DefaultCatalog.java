@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.processing.Generated;
+import jakarta.annotation.processing.Generated;
 
 import org.jooq.Schema;
 import org.jooq.impl.CatalogImpl;

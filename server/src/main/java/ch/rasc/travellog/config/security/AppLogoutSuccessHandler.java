@@ -2,8 +2,8 @@ package ch.rasc.travellog.config.security;
 
 import static ch.rasc.travellog.db.tables.AppSession.APP_SESSION;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.jooq.DSLContext;
 import org.springframework.context.ApplicationEventPublisher;

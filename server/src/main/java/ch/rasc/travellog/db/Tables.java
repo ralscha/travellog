@@ -3,7 +3,7 @@
  */
 package ch.rasc.travellog.db;
 
-import javax.annotation.processing.Generated;
+import jakarta.annotation.processing.Generated;
 
 import ch.rasc.travellog.db.tables.AppSession;
 import ch.rasc.travellog.db.tables.AppUser;

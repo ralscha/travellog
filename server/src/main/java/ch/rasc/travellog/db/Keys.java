@@ -3,7 +3,7 @@
  */
 package ch.rasc.travellog.db;
 
-import javax.annotation.processing.Generated;
+import jakarta.annotation.processing.Generated;
 
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
