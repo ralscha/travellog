@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import jakarta.imageio.ImageIO;
+import javax.imageio.ImageIO;
 
 import org.jooq.DSLContext;
 import org.springframework.http.HttpHeaders;
