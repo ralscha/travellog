@@ -24,8 +24,9 @@
       <ion-row>
         <ion-col offsetLg="4" offsetSm="3" sizeLg="4" sizeSm="6">
           <ion-item>
-            <ion-label position="stacked">Name</ion-label>
-            <ion-input #name="ngModel" [ngModel]="selectedTravel.name" name="name" [required]="true"></ion-input>
+            <ion-input #name="ngModel" [ngModel]="selectedTravel.name" [required]="true" label="Name"
+                       labelPlacement="stacked" name="name"
+            ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

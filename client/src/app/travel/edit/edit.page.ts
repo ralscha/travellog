@@ -39,7 +39,7 @@ export class TravelEditPage implements OnInit {
     if (this.selectedTravel) {
       const alert = await this.alertController.create({
         header: 'Delete Travel',
-        message: 'Do you really want to delete this entry?</strong>',
+        message: 'Do you really want to delete this entry?',
         buttons: [
           {
             text: 'Cancel',

@@ -1,12 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {AgmCoreModule} from '@agm/core';
 import {LogComponent} from './log/log.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatLegacyCardModule as MatCardModule} from '@angular/material/legacy-card';
+import {MatCardModule} from '@angular/material/card';
+import {GoogleMapsModule} from "@angular/google-maps";
 
 const routes: Routes = [{
   path: 'log/:id',
@@ -20,11 +20,9 @@ const routes: Routes = [{
   ],
   imports: [
     BrowserModule,
+    GoogleMapsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAZjJ216B4aJGdXTwXNevmXesob9RUSlPc'
-    }),
     BrowserAnimationsModule,
     MatCardModule
   ],

@@ -16,15 +16,13 @@
             "outputPath": "dist/app",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets",
               {
-                "glob": "@(md-share.svg|ios-share.svg|md-log-out.svg|ios-log-out.svg|md-people.svg|ios-people.svg|md-person.svg|ios-person.svg|md-menu.svg|ios-menu.svg|md-search.svg|ios-search.svg|md-close.svg|ios-close.svg|md-arrow-down.svg|ios-arrow-down.svg|md-add.svg|ios-add.svg|md-arrow-forward.svg|ios-arrow-forward.svg|md-trash.svg|ios-trash.svg|md-arrow-back.svg|ios-arrow-back.svg)",
+                "glob": "@(share.svg|ios-share.svg|log-out.svg|ios-log-out.svg|people.svg|ios-people.svg|person.svg|ios-person.svg|menu.svg|ios-menu.svg|search.svg|ios-search.svg|close.svg|ios-close.svg|arrow-down.svg|ios-arrow-down.svg|add.svg|ios-add.svg|arrow-forward.svg|ios-arrow-forward.svg|trash.svg|ios-trash.svg|arrow-back.svg|ios-arrow-back.svg)",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               },
@@ -48,7 +46,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "700kb",
                   "maximumError": "1mb"
                 },
                 {

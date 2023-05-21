@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {inject, NgModule} from '@angular/core';
+import {ActivatedRouteSnapshot, PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './service/auth.guard';
 
 const routes: Routes = [
@@ -11,19 +11,19 @@ const routes: Routes = [
   {
     path: 'log',
     loadChildren: () => import('./log/log.module').then(m => m.LogModule),
-    canActivate: [AuthGuard],
+    canActivate: [(route: ActivatedRouteSnapshot) => inject(AuthGuard).canActivate(route)],
     data: {role: 'USER', offline: true}
   },
   {
     path: 'travel',
     loadChildren: () => import('./travel/list/list.module').then(m => m.TravelListPageModule),
-    canActivate: [AuthGuard],
+    canActivate: [(route: ActivatedRouteSnapshot) => inject(AuthGuard).canActivate(route)],
     data: {role: 'USER', offline: true}
   },
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile/profile.module').then(m => m.ProfilePageModule),
-    canActivate: [AuthGuard]
+    canActivate: [(route: ActivatedRouteSnapshot) => inject(AuthGuard).canActivate(route)]
   },
   {
     path: 'email-change-confirm',
@@ -56,7 +56,7 @@ const routes: Routes = [
   {
     path: 'users',
     loadChildren: () => import('./users/users.module').then(m => m.UsersPageModule),
-    canActivate: [AuthGuard],
+    canActivate: [(route: ActivatedRouteSnapshot) => inject(AuthGuard).canActivate(route)],
     data: {role: 'ADMIN'}
   },
   {
@@ -72,7 +72,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true })
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules, useHash: true})
   ],
   exports: [RouterModule]
 })

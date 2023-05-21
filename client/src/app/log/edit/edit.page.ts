@@ -53,7 +53,7 @@ export class LogEditPage implements OnInit {
     if (this.selectedLog) {
       const alert = await this.alertController.create({
         header: 'Delete Log',
-        message: 'Do you really want to delete this entry?</strong>',
+        message: 'Do you really want to delete this entry?',
         buttons: [
           {
             text: 'Cancel',

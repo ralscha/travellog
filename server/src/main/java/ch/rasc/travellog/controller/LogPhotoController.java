@@ -135,9 +135,11 @@ public class LogPhotoController {
 
         GpsDirectory gpsDirectory = metadata.getFirstDirectoryOfType(GpsDirectory.class);
 
-        GeoLocation geoLocation = gpsDirectory.getGeoLocation();
-        if (geoLocation != null && !geoLocation.isZero()) {
-          // TODO: geoLocation.
+        if (gpsDirectory.getGeoLocation() != null) {
+          GeoLocation geoLocation = gpsDirectory.getGeoLocation();
+          if (geoLocation != null && !geoLocation.isZero()) {
+            // TODO: geoLocation.
+          }
         }
 
         BufferedImage bi = ImageIO.read(file.getInputStream());

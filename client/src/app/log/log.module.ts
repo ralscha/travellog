@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
+import {inject, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {RouterModule, Routes} from '@angular/router';
+import {ActivatedRouteSnapshot, RouterModule, Routes} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 import {LogListPage} from './list/list.page';
 import {LogEditPage} from './edit/edit.page';
@@ -12,26 +12,26 @@ const routes: Routes = [
   {
     path: '',
     component: LogListPage,
-    canActivate: [AuthGuard],
+    canActivate: [(route: ActivatedRouteSnapshot) => inject(AuthGuard).canActivate(route)],
     data: {role: 'USER', offline: true},
     pathMatch: 'full'
   },
   {
     path: 'edit',
     component: LogEditPage,
-    canActivate: [AuthGuard],
+    canActivate: [(route: ActivatedRouteSnapshot) => inject(AuthGuard).canActivate(route)],
     data: {role: 'USER', offline: true}
   },
   {
     path: 'edit/:id',
     component: LogEditPage,
-    canActivate: [AuthGuard],
+    canActivate: [(route: ActivatedRouteSnapshot) => inject(AuthGuard).canActivate(route)],
     data: {role: 'USER', offline: true}
   },
   {
     path: 'photo/:id',
     component: LogPhotoPage,
-    canActivate: [AuthGuard],
+    canActivate: [(route: ActivatedRouteSnapshot) => inject(AuthGuard).canActivate(route)],
     data: {role: 'USER', offline: false}
   },
   {

@@ -12,14 +12,16 @@ import {ActivatedRoute} from '@angular/router';
 export class LogComponent implements OnInit {
 
   travellog: string | null = null;
-
-  zoom = 8;
-  lat = 51.673858;
-  lng = 7.815982;
-
   selectedLog: Log | null = null;
 
   logs: Log[] = [];
+  options: google.maps.MapOptions = {
+    mapTypeId: 'hybrid',
+    maxZoom: 16,
+    zoom: 8,
+    center: {lat: 51.673858, lng: 7.815982}
+  };
+
 
   constructor(private readonly httpClient: HttpClient,
               private readonly route: ActivatedRoute) {

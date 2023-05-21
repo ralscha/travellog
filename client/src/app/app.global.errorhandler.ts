@@ -19,7 +19,7 @@ export class AppGlobalErrorhandler implements ErrorHandler {
         switchMap(() => from(this.appDatabase.errors.toArray())),
         filter(errors => errors.length > 0),
         switchMap(errors => this.httpClient.post<void>('/be/client-error', errors).pipe(mapTo(errors))),
-        switchMap(errors => this.appDatabase.errors.bulkDelete(errors.map(error => ""+error.id)))
+        switchMap(errors => this.appDatabase.errors.bulkDelete(errors.map(error => "" + error.id)))
       )
       .subscribe(noop, noop);
   }

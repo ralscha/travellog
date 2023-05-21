@@ -13,7 +13,7 @@ export class TravelService extends SyncService<Travel> {
     super(httpClient, appDatabase);
   }
 
-  async getDefaultTravelId(): Promise<number|undefined> {
+  async getDefaultTravelId(): Promise<number | undefined> {
     const defaultTravelId = await this.appDatabase.defaultTravel.limit(1).first();
     if (!defaultTravelId) {
       const firstTravel = await this.appDatabase.travel.limit(1).first();
@@ -24,7 +24,7 @@ export class TravelService extends SyncService<Travel> {
     return defaultTravelId;
   }
 
-  async getDefaultTravelName(): Promise<string|null|undefined> {
+  async getDefaultTravelName(): Promise<string | null | undefined> {
     const travelId = await this.getDefaultTravelId();
     if (travelId) {
       return (await this.appDatabase.travel.get(travelId))?.name;
@@ -33,7 +33,7 @@ export class TravelService extends SyncService<Travel> {
   }
 
   protected changed(oldEntry: Travel, newEntry: Travel): boolean {
-    return oldEntry.name !== newEntry.name;
+    return oldEntry?.name !== newEntry?.name;
   }
 
   protected getTableName(): string {

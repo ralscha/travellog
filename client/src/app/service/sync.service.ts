@@ -57,7 +57,9 @@ export abstract class SyncService<T extends SyncEntry> {
   async requestSync(): Promise<void> {
     this.updateSubject();
 
-    const syncViewObject = await this.httpClient.get<{ [key: string]: number }>(`/be/${this.getUrlPrefix()}_syncview`).toPromise();
+    const syncViewObject = await this.httpClient.get<{
+      [key: string]: number
+    }>(`/be/${this.getUrlPrefix()}_syncview`).toPromise();
 
     const syncView = new Map<number, number>();
     Object.entries(syncViewObject).forEach(kv => syncView.set(parseInt(kv[0], 10), kv[1]));
