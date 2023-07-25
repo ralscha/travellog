@@ -10,67 +10,69 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(Include.NON_NULL)
 public class LogSync {
 
-  private final long id;
+	private final long id;
 
-  private final long ts;
+	private final long ts;
 
-  private final long travelId;
+	private final long travelId;
 
-  private final long created;
+	private final long created;
 
-  private final BigDecimal lat;
+	private final BigDecimal lat;
 
-  private final BigDecimal lng;
+	private final BigDecimal lng;
 
-  private final String location;
+	private final String location;
 
-  private final String report;
+	private final String report;
 
-  @JsonCreator
-  public LogSync(@JsonProperty("id") long id, @JsonProperty("ts") long ts,
-      @JsonProperty("travelId") long travelId, @JsonProperty("created") long created,
-      @JsonProperty("lat") BigDecimal lat, @JsonProperty("lng") BigDecimal lng,
-      @JsonProperty("location") String location, @JsonProperty("report") String report) {
-    this.id = id;
-    this.ts = ts;
-    this.travelId = travelId;
-    this.created = created;
-    this.lat = lat;
-    this.lng = lng;
-    this.location = location;
-    this.report = report;
-  }
+	@JsonCreator
+	public LogSync(@JsonProperty("id") long id, @JsonProperty("ts") long ts,
+			@JsonProperty("travelId") long travelId,
+			@JsonProperty("created") long created, @JsonProperty("lat") BigDecimal lat,
+			@JsonProperty("lng") BigDecimal lng,
+			@JsonProperty("location") String location,
+			@JsonProperty("report") String report) {
+		this.id = id;
+		this.ts = ts;
+		this.travelId = travelId;
+		this.created = created;
+		this.lat = lat;
+		this.lng = lng;
+		this.location = location;
+		this.report = report;
+	}
 
-  public long getId() {
-    return this.id;
-  }
+	public long getId() {
+		return this.id;
+	}
 
-  public long getTs() {
-    return this.ts;
-  }
+	public long getTs() {
+		return this.ts;
+	}
 
-  public long getTravelId() {
-    return this.travelId;
-  }
+	public long getTravelId() {
+		return this.travelId;
+	}
 
-  public long getCreated() {
-    return this.created;
-  }
+	public long getCreated() {
+		return this.created;
+	}
 
-  public BigDecimal getLat() {
-    return this.lat;
-  }
+	public BigDecimal getLat() {
+		return this.lat;
+	}
 
-  public BigDecimal getLng() {
-    return this.lng;
-  }
+	public BigDecimal getLng() {
+		return this.lng;
+	}
 
-  public String getLocation() {
-    return this.location;
-  }
+	public String getLocation() {
+		return this.location;
+	}
 
-  public String getReport() {
-    return this.report;
-  }
+	public String getReport() {
+		return this.report;
+	}
 
 }

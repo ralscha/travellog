@@ -8,30 +8,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(Include.NON_NULL)
 public class TravelSync {
 
-  private final long id;
+	private final long id;
 
-  private final long ts;
+	private final long ts;
 
-  private final String name;
+	private final String name;
 
-  @JsonCreator
-  public TravelSync(@JsonProperty("id") long id, @JsonProperty("ts") long ts,
-      @JsonProperty("name") String name) {
-    this.id = id;
-    this.ts = ts;
-    this.name = name;
-  }
+	@JsonCreator
+	public TravelSync(@JsonProperty("id") long id, @JsonProperty("ts") long ts,
+			@JsonProperty("name") String name) {
+		this.id = id;
+		this.ts = ts;
+		this.name = name;
+	}
 
-  public long getId() {
-    return this.id;
-  }
+	public long getId() {
+		return this.id;
+	}
 
-  public long getTs() {
-    return this.ts;
-  }
+	public long getTs() {
+		return this.ts;
+	}
 
-  public String getName() {
-    return this.name;
-  }
+	public String getName() {
+		return this.name;
+	}
 
 }

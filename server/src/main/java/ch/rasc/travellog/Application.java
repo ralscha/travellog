@@ -15,12 +15,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableAsync
 public class Application {
-  public static final Logger log = LoggerFactory.getLogger("app");
+	public static final Logger log = LoggerFactory.getLogger("app");
 
-  public static void main(String[] args) {
-    TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
+	public static void main(String[] args) {
+		TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
 
-    SpringApplication.run(Application.class, args);
-  }
+		SpringApplication.run(Application.class, args);
+	}
 
 }
