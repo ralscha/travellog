@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Log} from './log';
-import format from 'date-fns/format';
+import {format} from 'date-fns';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({

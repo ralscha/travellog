@@ -5,8 +5,8 @@ import {AlertController} from '@ionic/angular';
 import {NgForm} from '@angular/forms';
 import {Log} from '../../model/log';
 import {LogService} from '../../service/log.service';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
+import {format} from 'date-fns';
+import {parse} from 'date-fns';
 
 @Component({
   selector: 'app-log-edit',

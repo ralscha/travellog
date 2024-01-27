@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {LogService} from '../../service/log.service';
 import {Log} from '../../model/log';
 import {TravelService} from '../../service/travel.service';
-import format from 'date-fns/format';
+import {format} from 'date-fns';
 
 @Component({
   selector: 'app-log-list',
