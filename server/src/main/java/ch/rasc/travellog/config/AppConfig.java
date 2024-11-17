@@ -12,18 +12,18 @@ import com.samskivert.mustache.Mustache;
 @Configuration
 public class AppConfig {
 
-	@Bean
-	public Mustache.Compiler mustacheCompiler() {
+    @Bean
+    Mustache.Compiler mustacheCompiler() {
 		return Mustache.compiler();
 	}
 
-	@Bean
-	public PasswordPolicy passwordPolicy() {
+    @Bean
+    PasswordPolicy passwordPolicy() {
 		return new PasswordPolicy(BreachDatabase.top100K(), 8, 256);
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
+    @Bean
+    PasswordEncoder passwordEncoder() {
 		return new Argon2PasswordEncoder(16, 32, 8, 1 << 16, 4);
 	}
 

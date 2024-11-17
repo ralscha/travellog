@@ -43,9 +43,9 @@ class SecurityConfig {
 		return new MvcRequestMatcher.Builder(introspector);
 	}
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http,
-			MvcRequestMatcher.Builder mvc) throws Exception {
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http,
+                                 MvcRequestMatcher.Builder mvc) throws Exception {
 		var pathPrefix = "/be";
 
 	// @formatter:off
