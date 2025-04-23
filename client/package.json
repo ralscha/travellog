@@ -43,7 +43,7 @@
     "@angular/cli": "17.3.8",
     "@angular/compiler-cli": "17.3.10",
     "@fortawesome/fontawesome-free": "6.6.0",
-    "@ionic/angular-toolkit": "12.1.1",
+    "@ionic/angular-toolkit": "12.2.0",
     "@typescript-eslint/eslint-plugin": "7.16.0",
     "@typescript-eslint/parser": "7.16.0",
     "bread-compressor-cli": "3.1.2",
