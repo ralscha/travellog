@@ -24,7 +24,7 @@
     "@angular/router": "17.3.10",
     "@angular/service-worker": "17.3.10",
     "@ionic/angular": "7.8.6",
-    "ionicons": "7.4.0",
+    "ionicons": "8.0.8",
     "date-fns": "4.1.0",
     "dexie": "4.0.11",
     "pwacompat": "2.0.17",
